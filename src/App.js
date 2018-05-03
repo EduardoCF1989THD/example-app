@@ -10,36 +10,38 @@ class App extends Component {
     }
 
     buttonClick(e){
-        e.preventDefault();
-        console.log("clicked", e.target);
+      // e.preventDefault();
+       // console.log("clicked", e.target);
         // fetch(`${domainForDoors}/readAlbums`).then(console.log);
-        fetch(`http://localhost:8080/readAlbums`)
-            .then(response => {
-                console.log('GrandChild did mount.');
-                alert(response.text());
-            });
+        // fetch(`http://localhost:8080/readAlbums`)
+        //     .then(response => {
+        //         console.log('GrandChild did mount.');
+        //         alert(response.text());
+        //     });
+
+        // fetch(`http://localhost:8080/getAllDoors`)
+        //     .then(response => response.json())
+        //     .then(r => this.setState({data: JSON.stringify(r, null, 2)}));
+
+
+       // alert(document.querySelector('#textBox').value)
+        var textBoxValue = document.querySelector('#textBox').value;
+        if(textBoxValue != null){
+            fetch('http://localhost:8080/addDoor', {
+                method: 'POST',
+                body: textBoxValue
+            })
+        }
+        else{
+            alert("Please provide a name for the door and try again.");
+        }
+
     }
 
     componentDidMount() {
-        //This function is called correctly
-       // alert('GrandChild did mount.');
-
-        // fetch('http://localhost:8080/getAllDoors')
-        //     .then((response) => response.json())
-        //     .then((responseJson) => {
-        //         alert(responseJson);
-        //     });
-
-
         fetch(`http://localhost:8080/getAllDoors`)
             .then(response => response.json())
             .then(r => this.setState({data: JSON.stringify(r, null, 2)}));
-
-        // fetch(`http://localhost:8080/getAllDoors`)
-        //     .then(body => {
-        //         console.log('GrandChild did mount.');
-        //         alert("sfrgddgf");
-        //     });
     }
 
 
@@ -52,8 +54,8 @@ class App extends Component {
                 </header>
 
                 <form className="App-intro">
-                    <input type="text" />
-                    <input type="submit" value="Eduardo" onClick={this.buttonClick}/>
+                    <input id="textBox" type="text" />
+                    <input type="submit" value="Submit" onClick={this.buttonClick}/>
                 </form>
                 <div style={{textAlign: "left", whiteSpace: "pre-wrap"}}>{this.state.data}</div>
             </div>
