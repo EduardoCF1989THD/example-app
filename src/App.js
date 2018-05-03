@@ -12,7 +12,7 @@ class App extends Component {
     buttonClick(e){
         var textBoxValue = document.querySelector('#textBox').value;
         if(textBoxValue != null){
-            fetch('http://localhost:8080/addDoor', {
+            fetch('http://35.225.213.185/addDoor', {
                 method: 'POST',
                 body: textBoxValue
             })
@@ -20,7 +20,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8080/getAllDoors`)
+        fetch(`http://35.225.213.185/getAllDoors`)
             .then(response => response.json())
             .then(r => this.setState({data: JSON.stringify(r, null, 2)}));
     }
