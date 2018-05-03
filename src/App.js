@@ -10,21 +10,6 @@ class App extends Component {
     }
 
     buttonClick(e){
-      // e.preventDefault();
-       // console.log("clicked", e.target);
-        // fetch(`${domainForDoors}/readAlbums`).then(console.log);
-        // fetch(`http://localhost:8080/readAlbums`)
-        //     .then(response => {
-        //         console.log('GrandChild did mount.');
-        //         alert(response.text());
-        //     });
-
-        // fetch(`http://localhost:8080/getAllDoors`)
-        //     .then(response => response.json())
-        //     .then(r => this.setState({data: JSON.stringify(r, null, 2)}));
-
-
-       // alert(document.querySelector('#textBox').value)
         var textBoxValue = document.querySelector('#textBox').value;
         if(textBoxValue != null){
             fetch('http://localhost:8080/addDoor', {
@@ -32,10 +17,6 @@ class App extends Component {
                 body: textBoxValue
             })
         }
-        else{
-            alert("Please provide a name for the door and try again.");
-        }
-
     }
 
     componentDidMount() {
@@ -64,32 +45,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-
-// handleChange = (event) => {
-//     this.setState({request: event.target.value})
-// }
-//
-// handleSubmit = (event) => {
-//     event.preventDefault();
-//     var request = this.state.request.trim();
-//     if(!request){
-//         return;
-//     }
-//     // fetch('/echo?request=${request}')
-//     //     .then(response => {
-//     //         return response.text();
-//     //     })
-//     //     .then(body => {
-//     //         alert(body);
-//     //     });
-//     fetch('')
-//         .then(response => {
-//             return response.text();
-//         })
-//         .then(body => {
-//             alert(body);
-//         });
-//
-// }
