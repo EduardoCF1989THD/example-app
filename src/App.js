@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import axios from 'axios'
 class App extends Component {
 
     constructor(){
         super();
-        this.state = {data: null}
+        this.state ={
+            doors:[],
+        }
     }
 
     buttonClick(e){
@@ -19,26 +21,48 @@ class App extends Component {
         }
     }
 
+
+    getAllDoors =() => {
+        axios.get(`http://35.225.213.185/getAllDoors`)
+            .then(response => {
+                const  doors = response.data
+                this.setState({ doors })
+            })
+    }
+
     componentDidMount() {
-        fetch(`http://35.225.213.185/getAllDoors`)
-            .then(response => response.json())
-            .then(r => this.setState({data: JSON.stringify(r, null, 2)}));
+        this.getAllDoors()
     }
 
 
     render() {
+        const doorList = this.state.doors.map((door, i) => {
+            return (
+                <div>
+                    <h2> name: {door.name}</h2>
+                    <h3>id: {door.id}</h3>
+                    --------------------------------------------------------------
+                </div>
+
+            )
+        })
         return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">This is my message</h1>
+                    <h1 className="App-title">Dock Doors</h1>
                 </header>
 
                 <form className="App-intro">
-                    <input id="textBox" type="text" />
+                    <input id="textBox" type="text"  required />
                     <input type="submit" value="Submit" onClick={this.buttonClick}/>
                 </form>
                 <div style={{textAlign: "left", whiteSpace: "pre-wrap"}}>{this.state.data}</div>
+
+                <div>
+                    {doorList}
+
+                </div>
             </div>
         );
     }
